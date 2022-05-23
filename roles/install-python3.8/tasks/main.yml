@@ -1,0 +1,43 @@
+---
+- name: Check for Python
+  raw: test -e /usr/bin/python3.8
+  register: check_python
+  ignore_errors: yes
+
+- debug:
+    var: check_python
+
+- name: Enable Python 3.8 packages in extras repo
+  raw: amazon-linux-extras enable python3.8
+
+- name: Linux | Install Python dependencies
+  package:
+    name: ['xz-devel','bzip2-devel','gcc','openssl-devel','libffi-devel']
+    state: present
+  when: check_python is failed
+
+- name: Install Python
+  raw: yum -y install python3.8
+  when: (check_python is failed) and (ansible_facts['os_family'] == 'RedHat') and (ansible_facts['distribution'] == 'Amazon')
+
+- name: Create a directory
+  file:
+    path: /usr/local/python3.8/bin/
+    state: directory
+    mode: '0755'
+
+- name: Creating a python symlink
+  file:
+    src: /usr/bin/python3
+    dest: /usr/local/python3.8/bin/python3.8
+    state: link
+
+- name: Creating a pip symlink
+  file:
+    src: /usr/bin/pip3
+    dest: /usr/local/python3.8/bin/pip3.8
+    state: link
+
+- debug:
+    msg: "Python3.8.5 installation completed successfully"
+
