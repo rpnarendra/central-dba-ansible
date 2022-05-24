@@ -1,0 +1,15 @@
+---
+- hosts: node1
+  remote_user: nreddy
+  tasks:
+    - name: Install virtualenv via pip
+      pip:
+        name: virtualenv
+        executable: pip3
+
+    - name: setup virualenv
+      command: python3.8 -m venv myenv
+      args:
+        chdir: /home/nreddy/python-venv
+
+
