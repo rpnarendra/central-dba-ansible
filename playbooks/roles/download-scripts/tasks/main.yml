@@ -1,0 +1,13 @@
+---
+- name: Create a directory
+  file:
+    path: /opt/scripts/
+    owner: nreddy
+    group: nreddy
+    state: directory
+    mode: '0755'
+
+- name: Download python scripts
+  git:
+    repo: https://github.com/rpnarendra/central-dba-ansible.git
+    dest: /opt/scripts/python
