@@ -1,11 +1,12 @@
 ---
 - name: Check for Python
-  raw: test -e /usr/bin/python3.8
+  stat:
+    path: /usr/bin/python3.8
   register: check_python
-  ignore_errors: yes
 
 - debug:
-    var: check_python
+    msg: "python3.8 installed already"
+  when: check_python.stat.exists
 
 - name: Enable Python 3.8 packages in extras repo
   raw: amazon-linux-extras enable python3.8
@@ -14,11 +15,11 @@
   package:
     name: ['xz-devel','bzip2-devel','gcc','openssl-devel','libffi-devel']
     state: present
-  when: check_python is failed
+  when: check_python.stat.exists == false
 
 - name: Install Python
   raw: yum -y install python3.8
-  when: (check_python is failed) and (ansible_facts['os_family'] == 'RedHat') and (ansible_facts['distribution'] == 'Amazon')
+  when: (check_python.stat.exists==false) and (ansible_facts['os_family'] == 'RedHat') and (ansible_facts['distribution'] == 'Amazon')
 
 - name: Create a directory
   file:

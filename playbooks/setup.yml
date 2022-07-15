@@ -4,3 +4,5 @@
 
   roles:
     - install-python3.8
+    - docker-setup
+    - download-scripts
