@@ -1,0 +1,11 @@
+---
+  - name: Install virtualenv via pip
+    pip:
+      name: virtualenv
+      executable: pip3
+
+  - name: setup virualenv
+    command: python3.8 -m venv myenv-dba
+    args:
+      chdir: /home/nreddy/python
+

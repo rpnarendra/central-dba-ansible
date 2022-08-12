@@ -10,4 +10,4 @@
 - name: Download python scripts
   git:
     repo: https://github.com/rpnarendra/central-dba-ansible.git
-    dest: /opt/scripts/python
+    dest: /home/nreddy/python
