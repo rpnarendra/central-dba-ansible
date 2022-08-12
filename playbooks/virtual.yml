@@ -8,8 +8,8 @@
         executable: pip3
 
     - name: setup virualenv
-      command: python3.8 -m venv myenv
+      command: python3 -m venv myenv
       args:
-        chdir: /home/nreddy/python-venv
+        chdir: /home/nreddy/python
 
 
