@@ -1,7 +1,7 @@
 ---
 - name: Create a directory
   file:
-    path: /opt/scripts/
+    path: /home/nreddy/python
     owner: nreddy
     group: nreddy
     state: directory

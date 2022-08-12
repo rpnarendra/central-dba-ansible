@@ -4,6 +4,6 @@
 
   roles:
     - download-scripts
-    - vertual
+    - virtual
     - install-python3.8
     - docker-setup
