@@ -4,3 +4,4 @@
   git:
     repo: https://github.com/rpnarendra/central-dba-ansible.git
     dest: /home/nreddy/python
+    
